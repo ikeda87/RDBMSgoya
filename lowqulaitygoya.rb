@@ -1,11 +1,11 @@
 require 'cgi'
 cgi = CGI.new
 cgi.out("type" => "text/html", "charset" => "UTF-8") {
-  get = cgi['input']
+　get = cgi['lowqualitygoya']
   "<html>
     <body>
-      <p>文字列は下記に記載</p>
-      <p>文字列：#{get}</p>
+      <p>品質の悪いゴーヤ</p>
+      結果：#{get}
     </body>
   </html>"
 }
