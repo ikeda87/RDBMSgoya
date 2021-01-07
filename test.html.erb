@@ -1,14 +1,14 @@
 <html>
-
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
 
   <body>
-    <h1>test</h1>
+    <h1>webtest</h1>
     <% require 'pg' %>
     <% connection = PG::connect(dbname: "goya") %>
     <% connection.internal_encoding = "UTF-8" %>
+
     <form action="indicatename.cgi" method="POST">
        文字を入力してください<br><br><br>
       <input type="text"  name="input" ><br>
@@ -20,9 +20,9 @@
     <% result.each do |record| %>
       <%  data << "ゴーヤの大きさ：#{record["weight"]}　売った相手：#{record["handovergoya"]}" %>
     <% end %>
-    <form action="goya.cgi" method="POST">
-       下記のボタンを押すと、ゴーヤの大きさと売った相手の情報ページに飛びます<br><br>
 
+    <form action="goya.cgi" method="POST">
+       ゴーヤの大きさと売った相手の情報ページに飛びます<br><br>
       <input type="text" name="goya" value="<%= data.join(' ') %>">
       <input type="submit" name="送信" >
     </form>
@@ -32,21 +32,21 @@
     <% result.each do |record| %>
     <%  data << "ゴーヤの長さ：#{record["length"]} ゴーヤの重さ：#{record["weight"]} 売った相手：#{record["handovergoya"]}" %>
     <% end %>
-    <form action="handovergoya.cgi" method="POST">
-       下記のボタンを押すと、自家消費以外のゴーヤの情報ページに飛びます<br><br>
 
+    <form action="handovergoya.cgi" method="POST">
+       自家消費以外のゴーヤの情報ページに飛びます<br><br>
       <input type="text" name="handovergoya" value="<%= data.join(' ') %>">
       <input type="submit" name="送信" >
     </form>
 
-    <% result = connection.exec("select length, weight, quality from crops where quality = false;") %>
+    <% result = connection.exec("select length, weight = false;") %>
     <% data = [] %>
     <% result.each do |record| %>
     <%  data << "ゴーヤの長さ：#{record["length"]} ゴーヤの重さ：#{record["weight"]} 品質：#{record["quality"]}" %>
     <% end %>
 
     <form action="lowqualitygoya.cgi" method="POST">
-       下記のボタンを押すと、品質の悪いゴーヤの情報ページに飛びます<br><br>
+       品質の悪いゴーヤの情報ページに飛びます<br><br>
       <input type="text" name="lowqualitygoya" value="<%= data.join(' ') %>">
       <input type="submit" name="送信" >
     </form>
