@@ -9,3 +9,4 @@ cgi.out("type" => "text/html", "charset" => "UTF-8") {
     </body>
   </html>"
 }
+# データを受け取り、返却するCGIプログラムの起動後、HTMLの形式でレスポンスを返す
